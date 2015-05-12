@@ -15,21 +15,29 @@ public class EPUBContainerParser:NSObject, NSXMLParserDelegate {
     // spine array provides order of chapters
     var spineArray = [String]()
     var contentPath = ""
+    var contentPaths = [String]()
     var parentFolder = ""
+    var parentFolders = [String]()
     
     // returns ordered list of NSURLs for contents
     public func parseXML(xml:NSURL) -> [NSURL] {
         contentPath = xml.path! + "/"
-        
         if let container = NSXMLParser(contentsOfURL: xml.URLByAppendingPathComponent("META-INF/container.xml")) {
             container.delegate = self
             container.parse()
         }
-        
-        if let url = NSURL(fileURLWithPath: contentPath),
+        // takes account of multiple rootfiles and will return every NSURL in order for multiple versions contained in the rootfile
+        while contentPaths.isEmpty == false {
+        if let path = contentPaths.first,
+            url = NSURL(fileURLWithPath: path),
             xml = NSXMLParser(contentsOfURL: url) {
+                parentFolder = parentFolders.first!
+                contentPaths.removeAtIndex(0)
+                parentFolders.removeAtIndex(0)
                 xml.delegate = self
                 xml.parse()
+                
+        }
         }
         let urlArray = map(spineArray, {NSURL(fileURLWithPath: self.manifestDictionary[$0]!)!})
         let returnArray = filter(urlArray, {$0 != nil})
@@ -43,9 +51,11 @@ public class EPUBContainerParser:NSObject, NSXMLParserDelegate {
     public func parser(parser: NSXMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [NSObject : AnyObject]) {
         
         if elementName == "rootfile" {
+            let content = contentPath + (attributeDict["full-path"] as! String)
+            contentPaths.append(content)
+            let parent = contentPath.stringByDeletingLastPathComponent + "/"
+            parentFolders.append(parent)
             
-            contentPath += attributeDict["full-path"] as! String
-            parentFolder = contentPath.stringByDeletingLastPathComponent + "/"
         }
         
         if elementName == "manifest" {
