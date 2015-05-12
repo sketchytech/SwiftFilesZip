@@ -13,7 +13,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        FileSave.saveString("Hello Swift!", directory: NSSearchPathDirectory.DocumentDirectory, path: "myfile.txt", subdirectory: nil)
+        
     }
 
     override func didReceiveMemoryWarning() {

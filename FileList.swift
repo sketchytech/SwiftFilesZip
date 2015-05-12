@@ -9,28 +9,28 @@
 import Foundation
 // see here for Apple's ObjC Code https://developer.apple.com/library/mac/documentation/FileManagement/Conceptual/FileSystemProgrammingGuide/AccessingFilesandDirectories/AccessingFilesandDirectories.html
 public class FileList {
-    public static func allFilesAndFolders(path:String, inDirectory directory:NSSearchPathDirectory, subdirectory:String?) -> [NSURL]? {
-
+    public static func allFilesAndFolders(inDirectory directory:NSSearchPathDirectory, subdirectory:String?) -> [NSURL]? {
+        
         // Create load path
-        let loadPath = buildPath(path, inDirectory: directory, subdirectory: subdirectory)
-        
-        let url = NSURL(fileURLWithPath: loadPath)
-        var error:NSError?
-        
-        var properties = [NSURLLocalizedNameKey,
-            NSURLCreationDateKey, NSURLLocalizedTypeDescriptionKey]
-        if let url = url,
-        array = NSFileManager.defaultManager().contentsOfDirectoryAtURL(url, includingPropertiesForKeys: properties, options:NSDirectoryEnumerationOptions.SkipsHiddenFiles, error: &error) as? [NSURL] {
-        return array
-        
-}
+        if let loadPath = buildPathToDirectory(directory, subdirectory: subdirectory) {
+            
+            let url = NSURL(fileURLWithPath: loadPath)
+            var error:NSError?
+            
+            var properties = [NSURLLocalizedNameKey,
+                NSURLCreationDateKey, NSURLLocalizedTypeDescriptionKey]
+            if let url = url,
+                array = NSFileManager.defaultManager().contentsOfDirectoryAtURL(url, includingPropertiesForKeys: properties, options:NSDirectoryEnumerationOptions.SkipsHiddenFiles, error: &error) as? [NSURL] {
+                    return array
+            }
+        }
         return nil
-}
+    }
     
-    public static func allFilesAndFoldersInTemporaryDirectory(path:String, inDirectory directory:NSSearchPathDirectory, subdirectory:String?) -> [NSURL]? {
+    public static func allFilesAndFoldersInTemporaryDirectory(subdirectory:String?) -> [NSURL]? {
         
         // Create load path
-        let loadPath = buildPathToTemporaryDirectory(path, subdirectory: subdirectory)
+        let loadPath = buildPathToTemporaryDirectory(subdirectory)
         
         let url = NSURL(fileURLWithPath: loadPath)
         var error:NSError?
@@ -48,44 +48,49 @@ public class FileList {
     
     // private methods
     
-    private static func buildPath(path:String, inDirectory directory:NSSearchPathDirectory, subdirectory:String?) -> String  {
+    private static func buildPathToDirectory(directory:NSSearchPathDirectory, subdirectory:String?) -> String?  {
         // Remove unnecessary slash if need
-        let newPath = stripSlashIfNeeded(path)
-        var subDir:String?
+        // Remove unnecessary slash if need
+        var subDir = ""
         if let sub = subdirectory {
-            subDir = stripSlashIfNeeded(sub)
+            subDir = FileHelper.stripSlashIfNeeded(sub)
         }
         
-        // Create generic beginning to file load path
-        var loadPath = ""
+        // Create generic beginning to file delete path
+        var buildPath = ""
         
-        if let direct = applicationDirectory(directory),
+        if let direct = FileDirectory.applicationDirectory(directory),
             path = direct.path {
-                loadPath = path + "/"
-        }
-        
-        if let sub = subDir {
-            loadPath += sub
-            loadPath += "/"
+                buildPath = path + "/"
         }
         
         
-        // Add requested load path
-        loadPath += newPath
-        return loadPath
+        buildPath += subDir
+        buildPath += "/"
+        
+        
+        var dir:ObjCBool = true
+        let dirExists = NSFileManager.defaultManager().fileExistsAtPath(buildPath, isDirectory:&dir)
+        if dir.boolValue == false {
+            return nil
+        }
+        if dirExists == false {
+            return nil
+        }
+        return buildPath
     }
-    public static func buildPathToTemporaryDirectory(path:String, subdirectory:String?) -> String {
+    public static func buildPathToTemporaryDirectory(subdirectory:String?) -> String {
         // Remove unnecessary slash if need
-        let newPath = stripSlashIfNeeded(path)
+        
         var subDir:String?
         if let sub = subdirectory {
-            subDir = stripSlashIfNeeded(sub)
+            subDir = FileHelper.stripSlashIfNeeded(sub)
         }
         
         // Create generic beginning to file load path
         var loadPath = ""
         
-        if let direct = self.applicationTemporaryDirectory(),
+        if let direct = FileDirectory.applicationTemporaryDirectory(),
             path = direct.path {
                 loadPath = path + "/"
         }
@@ -97,49 +102,9 @@ public class FileList {
         
         
         // Add requested save path
-        loadPath += newPath
         return loadPath
     }
     
-    //directories
-    private static func applicationDirectory(directory:NSSearchPathDirectory) -> NSURL? {
-        
-        var appDirectory:String?
-        var paths:[AnyObject] = NSSearchPathForDirectoriesInDomains(directory, NSSearchPathDomainMask.UserDomainMask, true);
-        if paths.count > 0 {
-            if let pathString = paths[0] as? String {
-                appDirectory = pathString
-            }
-        }
-        if let dD = appDirectory {
-            return NSURL(string:dD)
-        }
-        return nil
-    }
     
     
-    
-    
-    private static func applicationTemporaryDirectory() -> NSURL? {
-        
-        if let tD = NSTemporaryDirectory() {
-            return NSURL(string:tD)
-        }
-        
-        return nil
-        
-    }
-    
-    //pragma mark - strip slashes
-    
-    private static func stripSlashIfNeeded(stringWithPossibleSlash:String) -> String {
-        var stringWithoutSlash:String = stringWithPossibleSlash
-        // If the file name contains a slash at the beginning then we remove so that we don't end up with two
-        if stringWithPossibleSlash.hasPrefix("/") {
-            stringWithoutSlash = stringWithPossibleSlash.substringFromIndex(advance(stringWithoutSlash.startIndex,1))
-        }
-        // Return the string with no slash at the beginning
-        return stringWithoutSlash
-    }
-
 }

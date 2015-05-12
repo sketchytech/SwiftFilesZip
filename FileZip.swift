@@ -18,23 +18,72 @@ public class FileZip {
             subDir = stripSlashIfNeeded(sub)
         }
         
-        // Create generic beginning to file load path
-        var loadPath = ""
+        // Create generic beginning to file save path
+        var savePath = ""
         
         if let direct = applicationDirectory(directory),
-            path = direct.path {
-                loadPath = path + "/"
+            savingPath = direct.path {
+                savePath = savingPath + "/"
         }
         
         if let sub = subDir {
-            loadPath += sub
-            loadPath += "/"
+            savePath += sub
+            savePath += "/"
         }
         
         // Add requested save path
-        loadPath += newPath
-        SSZipArchive.unzipFileAtPath(path, toDestination: loadPath)
+
+        SSZipArchive.unzipFileAtPath(path, toDestination: savePath)
     }
+    public static func unzipFileToTemporaryDirectory(path:String, subdirectory:String?) {
+        // Remove unnecessary slash if need
+        // Remove unnecessary slash if need
+        let newPath = stripSlashIfNeeded(path)
+        var subDir:String?
+        if let sub = subdirectory {
+            subDir = stripSlashIfNeeded(sub)
+        }
+        
+        // Create generic beginning to file save path
+        var savePath = ""
+        
+        if let direct = applicationTemporaryDirectory(),
+            savingPath = direct.path {
+                savePath = savingPath + "/"
+        }
+        
+        if let sub = subDir {
+            savePath += sub
+            savePath += "/"
+        }
+        
+
+        SSZipArchive.unzipFileAtPath(path, toDestination: savePath)
+    }
+    
+    public static func unzipEPUB(path:String, subdirectory:String?) -> [NSURL] {
+        unzipFileToTemporaryDirectory(path, subdirectory: subdirectory)
+        
+        
+        var subDir:String?
+        if let sub = subdirectory {
+            subDir = stripSlashIfNeeded(sub)
+        }
+
+        var savePath = ""
+        
+        if let direct = applicationTemporaryDirectory(),
+            savingPath = direct.path {
+                savePath = savingPath + "/"
+        }
+        
+        if let sub = subDir {
+            savePath += sub
+            savePath += "/"
+        }
+        return EPUBContainerParser().parseXML(NSURL(fileURLWithPath: savePath)!)
+    }
+    
     
     
     // private methods

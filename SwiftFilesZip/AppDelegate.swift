@@ -14,10 +14,32 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
 
+    func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject?) -> Bool {
+        if url.pathExtension == "epub" {
+            let folderName = "EPUB/" + url.path!.stringByDeletingPathExtension.lastPathComponent
+            let urls = FileZip.unzipEPUB(url.path!, subdirectory: folderName)
+            print(urls)
+        }
+        return true
+    }
+    func application(application: UIApplication, willFinishLaunchingWithOptions launchOptions: [NSObject : AnyObject]?) -> Bool {
+        if let url = launchOptions?[UIApplicationLaunchOptionsURLKey] as? NSURL {
+            let folderName = "EPUB/" + url.path!.stringByDeletingPathExtension.lastPathComponent
+            let urls = FileZip.unzipEPUB(url.path!, subdirectory: folderName)
+            print(urls)
+        }
+        return true
+    }
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+        if let url = launchOptions?[UIApplicationLaunchOptionsURLKey] as? NSURL
+        {                                  let folderName = "EPUB/" + url.path!.stringByDeletingPathExtension.lastPathComponent
+            FileZip.unzipEPUB(url.path!, subdirectory: folderName)
+
+        }
         // Override point for customization after application launch.
         return true
     }
+
 
     func applicationWillResignActive(application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
