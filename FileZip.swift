@@ -62,7 +62,10 @@ public class FileZip {
     }
     
     public static func unzipEPUB(path:String, subdirectory:String?) -> [NSURL] {
-        unzipFileToTemporaryDirectory(path, subdirectory: subdirectory)
+        
+        let subD = subdirectory ?? ""
+        // TODO: this works but don't force unwrap here!
+        unzipFileToTemporaryDirectory(path, subdirectory: "EPUB/" + subD)
         
         
         var subDir:String?
@@ -74,7 +77,7 @@ public class FileZip {
         
         if let direct = applicationTemporaryDirectory(),
             savingPath = direct.path {
-                savePath = savingPath + "/"
+                savePath = savingPath + "/EPUB/"
         }
         
         if let sub = subDir {

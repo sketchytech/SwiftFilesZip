@@ -16,7 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject?) -> Bool {
         if url.pathExtension == "epub" {
-            let folderName = "EPUB/" + url.path!.stringByDeletingPathExtension.lastPathComponent
+            let folderName = url.path!.stringByDeletingPathExtension.lastPathComponent
             let urls = FileZip.unzipEPUB(url.path!, subdirectory: folderName)
             print(urls)
         }
@@ -24,7 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     func application(application: UIApplication, willFinishLaunchingWithOptions launchOptions: [NSObject : AnyObject]?) -> Bool {
         if let url = launchOptions?[UIApplicationLaunchOptionsURLKey] as? NSURL {
-            let folderName = "EPUB/" + url.path!.stringByDeletingPathExtension.lastPathComponent
+            let folderName = url.path!.stringByDeletingPathExtension.lastPathComponent
             let urls = FileZip.unzipEPUB(url.path!, subdirectory: folderName)
             print(urls)
         }
@@ -32,7 +32,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         if let url = launchOptions?[UIApplicationLaunchOptionsURLKey] as? NSURL
-        {                                  let folderName = "EPUB/" + url.path!.stringByDeletingPathExtension.lastPathComponent
+        {   let folderName = url.path!.stringByDeletingPathExtension.lastPathComponent
             FileZip.unzipEPUB(url.path!, subdirectory: folderName)
 
         }
