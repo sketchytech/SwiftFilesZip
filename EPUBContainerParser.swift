@@ -14,6 +14,8 @@ public class EPUBContainerParser:NSObject, NSXMLParserDelegate {
     var manifestDictionary = [String:String]()
     // spine array provides order of chapters
     var spineArray = [String]()
+    var fontArray = [String]()
+    var imageArray = [String]()
     var contentPath = ""
     var contentPaths = [String]()
     var parentFolder = ""
@@ -41,6 +43,7 @@ public class EPUBContainerParser:NSObject, NSXMLParserDelegate {
         }
         let urlArray = map(spineArray, {NSURL(fileURLWithPath: self.manifestDictionary[$0]!)!})
         let returnArray = filter(urlArray, {$0 != nil})
+        // TODO: build an array of incorrect URLs for missing items
         return returnArray
     }
     
@@ -62,7 +65,17 @@ public class EPUBContainerParser:NSObject, NSXMLParserDelegate {
             isManifest = true
         }
         else if isManifest == true && elementName == "item" {
+            
+            // array of everything, if any NSURLs return nil when constructed then item is missing
             manifestDictionary[attributeDict["id"] as! String] = parentFolder + (attributeDict["href"] as! String)
+            
+            if attributeDict["media-type"] as! String == "application/vnd.ms-opentype" {
+                fontArray.append(attributeDict["href"] as! String)
+            }
+            
+            else if attributeDict["media-type"] as! String == "image/png"  || attributeDict["media-type"] as! String == "image/jpeg" || attributeDict["media-type"] as! String == "image/jpg" {
+                imageArray.append(attributeDict["href"] as! String)
+            }
         }
         else if elementName == "spine" {
             isSpine = true

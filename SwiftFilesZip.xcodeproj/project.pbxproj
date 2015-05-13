@@ -25,6 +25,7 @@
 		8E0A662D1AF23C66000CFB22 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E0A662C1AF23C66000CFB22 /* libz.dylib */; };
 		8E0A662F1AF23E88000CFB22 /* FileZip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0A662E1AF23E88000CFB22 /* FileZip.swift */; };
 		8E0A66311AF23FB0000CFB22 /* FileList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0A66301AF23FB0000CFB22 /* FileList.swift */; };
+		8EA5BE9D1B03455400662CF4 /* FileCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA5BE9C1B03455400662CF4 /* FileCollectionView.swift */; };
 		8ECA221B1B024F2400371911 /* EPUBContainerParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ECA221A1B024F2400371911 /* EPUBContainerParser.swift */; };
 		8EF29CD51AF267A8000F4112 /* FileHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EF29CD41AF267A8000F4112 /* FileHelper.swift */; };
 /* End PBXBuildFile section */
@@ -69,6 +70,7 @@
 		8E0A662C1AF23C66000CFB22 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		8E0A662E1AF23E88000CFB22 /* FileZip.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileZip.swift; sourceTree = "<group>"; };
 		8E0A66301AF23FB0000CFB22 /* FileList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileList.swift; sourceTree = "<group>"; };
+		8EA5BE9C1B03455400662CF4 /* FileCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileCollectionView.swift; sourceTree = "<group>"; };
 		8ECA221A1B024F2400371911 /* EPUBContainerParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EPUBContainerParser.swift; sourceTree = "<group>"; };
 		8EF29CD41AF267A8000F4112 /* FileHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileHelper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -118,6 +120,7 @@
 				8E0A65F11AF23B8F000CFB22 /* AppDelegate.swift */,
 				8E0A65F31AF23B8F000CFB22 /* ViewController.swift */,
 				8E0A65F51AF23B8F000CFB22 /* Main.storyboard */,
+				8EA5BE9C1B03455400662CF4 /* FileCollectionView.swift */,
 				8E0A65F81AF23B8F000CFB22 /* Images.xcassets */,
 				8E0A65FA1AF23B8F000CFB22 /* LaunchScreen.xib */,
 				8E0A65EF1AF23B8F000CFB22 /* Supporting Files */,
@@ -295,6 +298,7 @@
 				8E0A65F21AF23B8F000CFB22 /* AppDelegate.swift in Sources */,
 				8E0A66151AF23BAA000CFB22 /* FileDelete.swift in Sources */,
 				8E0A66181AF23BAA000CFB22 /* FileSave.swift in Sources */,
+				8EA5BE9D1B03455400662CF4 /* FileCollectionView.swift in Sources */,
 				8E0A66161AF23BAA000CFB22 /* FileDirectory.swift in Sources */,
 				8E0A66271AF23C26000CFB22 /* ioapi.c in Sources */,
 				8E0A662B1AF23C26000CFB22 /* SSZipArchive.m in Sources */,
