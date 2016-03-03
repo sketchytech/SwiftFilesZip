@@ -14,25 +14,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
 
-    func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject?) -> Bool {
+    func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
         if url.pathExtension == "epub" {
-            let folderName = url.path!.stringByDeletingPathExtension.lastPathComponent
+            let folderName = ((url.path! as NSString).stringByDeletingPathExtension as NSString).lastPathComponent
             let urls = FileZip.unzipEPUB(url.path!, subdirectory: folderName)
-            print(urls)
+            print(urls, terminator: "")
         }
         return true
     }
     func application(application: UIApplication, willFinishLaunchingWithOptions launchOptions: [NSObject : AnyObject]?) -> Bool {
         if let url = launchOptions?[UIApplicationLaunchOptionsURLKey] as? NSURL {
-            let folderName = url.path!.stringByDeletingPathExtension.lastPathComponent
+            let folderName = ((url.path! as NSString).stringByDeletingPathExtension as NSString).lastPathComponent
             let urls = FileZip.unzipEPUB(url.path!, subdirectory: folderName)
-            print(urls)
+            print(urls, terminator: "")
         }
         return true
     }
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         if let url = launchOptions?[UIApplicationLaunchOptionsURLKey] as? NSURL
-        {   let folderName = url.path!.stringByDeletingPathExtension.lastPathComponent
+        {   let folderName = ((url.path! as NSString).stringByDeletingPathExtension as NSString).lastPathComponent
             FileZip.unzipEPUB(url.path!, subdirectory: folderName)
 
         }

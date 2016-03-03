@@ -9,40 +9,39 @@
 import Foundation
 // see here for Apple's ObjC Code https://developer.apple.com/library/mac/documentation/FileManagement/Conceptual/FileSystemProgrammingGuide/AccessingFilesandDirectories/AccessingFilesandDirectories.html
 public class FileList {
-    public static func allFilesAndFolders(inDirectory directory:NSSearchPathDirectory, subdirectory:String?) -> [NSURL]? {
-        
+    public static func allFilesAndFolders(inDirectory directory:NSSearchPathDirectory, subdirectory:String?) throws -> [NSURL]? {
+
         // Create load path
         if let loadPath = buildPathToDirectory(directory, subdirectory: subdirectory) {
+        
+        let url = NSURL(fileURLWithPath: loadPath)
+       
+        let properties = [NSURLLocalizedNameKey,
+            NSURLCreationDateKey, NSURLLocalizedTypeDescriptionKey]
+
+        let array = try  NSFileManager.defaultManager().contentsOfDirectoryAtURL(url, includingPropertiesForKeys: properties, options:NSDirectoryEnumerationOptions.SkipsHiddenFiles)
+        return array
             
-            let url = NSURL(fileURLWithPath: loadPath)
-            var error:NSError?
-            
-            var properties = [NSURLLocalizedNameKey,
-                NSURLCreationDateKey, NSURLLocalizedTypeDescriptionKey]
-            if let url = url,
-                array = NSFileManager.defaultManager().contentsOfDirectoryAtURL(url, includingPropertiesForKeys: properties, options:NSDirectoryEnumerationOptions.SkipsHiddenFiles, error: &error) as? [NSURL] {
-                    return array
-            }
-        }
+}
         return nil
-    }
+}
     
-    public static func allFilesAndFoldersInTemporaryDirectory(subdirectory:String?) -> [NSURL]? {
+    public static func allFilesAndFoldersInTemporaryDirectory(subdirectory:String?) throws -> [NSURL]? {
         
         // Create load path
         let loadPath = buildPathToTemporaryDirectory(subdirectory)
         
         let url = NSURL(fileURLWithPath: loadPath)
-        var error:NSError?
         
-        var properties = [NSURLLocalizedNameKey,
+        
+        let properties = [NSURLLocalizedNameKey,
             NSURLCreationDateKey, NSURLLocalizedTypeDescriptionKey]
-        if let url = url,
-            array = NSFileManager.defaultManager().contentsOfDirectoryAtURL(url, includingPropertiesForKeys: properties, options:NSDirectoryEnumerationOptions.SkipsHiddenFiles, error: &error) as? [NSURL] {
+
+        let array = try NSFileManager.defaultManager().contentsOfDirectoryAtURL(url, includingPropertiesForKeys: properties, options:NSDirectoryEnumerationOptions.SkipsHiddenFiles)
                 return array
                 
-        }
-        return nil
+
+
     }
     
     
@@ -53,7 +52,7 @@ public class FileList {
         // Remove unnecessary slash if need
         var subDir = ""
         if let sub = subdirectory {
-            subDir = FileHelper.stripSlashIfNeeded(sub)
+        subDir = FileHelper.stripSlashIfNeeded(sub)
         }
         
         // Create generic beginning to file delete path
@@ -81,7 +80,7 @@ public class FileList {
     }
     public static func buildPathToTemporaryDirectory(subdirectory:String?) -> String {
         // Remove unnecessary slash if need
-        
+
         var subDir:String?
         if let sub = subdirectory {
             subDir = FileHelper.stripSlashIfNeeded(sub)
@@ -105,6 +104,6 @@ public class FileList {
         return loadPath
     }
     
-    
-    
+        
+   
 }

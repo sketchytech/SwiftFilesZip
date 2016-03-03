@@ -7,27 +7,27 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8E03A2D81C875E7C00EC92A8 /* FileDelete.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E03A2D21C875E7C00EC92A8 /* FileDelete.swift */; };
+		8E03A2D91C875E7C00EC92A8 /* FileDirectory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E03A2D31C875E7C00EC92A8 /* FileDirectory.swift */; };
+		8E03A2DA1C875E7C00EC92A8 /* FileHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E03A2D41C875E7C00EC92A8 /* FileHelper.swift */; };
+		8E03A2DB1C875E7C00EC92A8 /* FileList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E03A2D51C875E7C00EC92A8 /* FileList.swift */; };
+		8E03A2DC1C875E7C00EC92A8 /* FileLoad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E03A2D61C875E7C00EC92A8 /* FileLoad.swift */; };
+		8E03A2DD1C875E7C00EC92A8 /* FileSave.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E03A2D71C875E7C00EC92A8 /* FileSave.swift */; };
 		8E0A65F21AF23B8F000CFB22 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0A65F11AF23B8F000CFB22 /* AppDelegate.swift */; };
 		8E0A65F41AF23B8F000CFB22 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0A65F31AF23B8F000CFB22 /* ViewController.swift */; };
 		8E0A65F71AF23B8F000CFB22 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8E0A65F51AF23B8F000CFB22 /* Main.storyboard */; };
 		8E0A65F91AF23B8F000CFB22 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8E0A65F81AF23B8F000CFB22 /* Images.xcassets */; };
 		8E0A65FC1AF23B8F000CFB22 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8E0A65FA1AF23B8F000CFB22 /* LaunchScreen.xib */; };
 		8E0A66081AF23B8F000CFB22 /* SwiftFilesZipTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0A66071AF23B8F000CFB22 /* SwiftFilesZipTests.swift */; };
-		8E0A66151AF23BAA000CFB22 /* FileDelete.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0A66111AF23BAA000CFB22 /* FileDelete.swift */; };
-		8E0A66161AF23BAA000CFB22 /* FileDirectory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0A66121AF23BAA000CFB22 /* FileDirectory.swift */; };
-		8E0A66171AF23BAA000CFB22 /* FileLoad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0A66131AF23BAA000CFB22 /* FileLoad.swift */; };
-		8E0A66181AF23BAA000CFB22 /* FileSave.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0A66141AF23BAA000CFB22 /* FileSave.swift */; };
 		8E0A66271AF23C26000CFB22 /* ioapi.c in Sources */ = {isa = PBXBuildFile; fileRef = 8E0A661D1AF23C25000CFB22 /* ioapi.c */; };
 		8E0A66281AF23C26000CFB22 /* mztools.c in Sources */ = {isa = PBXBuildFile; fileRef = 8E0A661F1AF23C25000CFB22 /* mztools.c */; };
 		8E0A66291AF23C26000CFB22 /* unzip.c in Sources */ = {isa = PBXBuildFile; fileRef = 8E0A66211AF23C26000CFB22 /* unzip.c */; };
 		8E0A662A1AF23C26000CFB22 /* zip.c in Sources */ = {isa = PBXBuildFile; fileRef = 8E0A66231AF23C26000CFB22 /* zip.c */; };
 		8E0A662B1AF23C26000CFB22 /* SSZipArchive.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E0A66261AF23C26000CFB22 /* SSZipArchive.m */; };
-		8E0A662D1AF23C66000CFB22 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E0A662C1AF23C66000CFB22 /* libz.dylib */; };
 		8E0A662F1AF23E88000CFB22 /* FileZip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0A662E1AF23E88000CFB22 /* FileZip.swift */; };
-		8E0A66311AF23FB0000CFB22 /* FileList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0A66301AF23FB0000CFB22 /* FileList.swift */; };
 		8EA5BE9D1B03455400662CF4 /* FileCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA5BE9C1B03455400662CF4 /* FileCollectionView.swift */; };
+		8EBC65EF1C883EC20037376A /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EBC65EE1C883EC20037376A /* libz.tbd */; };
 		8ECA221B1B024F2400371911 /* EPUBContainerParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ECA221A1B024F2400371911 /* EPUBContainerParser.swift */; };
-		8EF29CD51AF267A8000F4112 /* FileHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EF29CD41AF267A8000F4112 /* FileHelper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,6 +41,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8E03A2D21C875E7C00EC92A8 /* FileDelete.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileDelete.swift; sourceTree = "<group>"; };
+		8E03A2D31C875E7C00EC92A8 /* FileDirectory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileDirectory.swift; sourceTree = "<group>"; };
+		8E03A2D41C875E7C00EC92A8 /* FileHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileHelper.swift; sourceTree = "<group>"; };
+		8E03A2D51C875E7C00EC92A8 /* FileList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileList.swift; sourceTree = "<group>"; };
+		8E03A2D61C875E7C00EC92A8 /* FileLoad.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileLoad.swift; sourceTree = "<group>"; };
+		8E03A2D71C875E7C00EC92A8 /* FileSave.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileSave.swift; sourceTree = "<group>"; };
 		8E0A65EC1AF23B8F000CFB22 /* SwiftFilesZip.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftFilesZip.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E0A65F01AF23B8F000CFB22 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8E0A65F11AF23B8F000CFB22 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -51,10 +57,6 @@
 		8E0A66011AF23B8F000CFB22 /* SwiftFilesZipTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftFilesZipTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E0A66061AF23B8F000CFB22 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8E0A66071AF23B8F000CFB22 /* SwiftFilesZipTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftFilesZipTests.swift; sourceTree = "<group>"; };
-		8E0A66111AF23BAA000CFB22 /* FileDelete.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileDelete.swift; sourceTree = "<group>"; };
-		8E0A66121AF23BAA000CFB22 /* FileDirectory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileDirectory.swift; sourceTree = "<group>"; };
-		8E0A66131AF23BAA000CFB22 /* FileLoad.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileLoad.swift; sourceTree = "<group>"; };
-		8E0A66141AF23BAA000CFB22 /* FileSave.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileSave.swift; sourceTree = "<group>"; };
 		8E0A661A1AF23C25000CFB22 /* SwiftFilesZip-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SwiftFilesZip-Bridging-Header.h"; sourceTree = "<group>"; };
 		8E0A661C1AF23C25000CFB22 /* crypt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = crypt.h; sourceTree = "<group>"; };
 		8E0A661D1AF23C25000CFB22 /* ioapi.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ioapi.c; sourceTree = "<group>"; };
@@ -67,12 +69,10 @@
 		8E0A66241AF23C26000CFB22 /* zip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zip.h; sourceTree = "<group>"; };
 		8E0A66251AF23C26000CFB22 /* SSZipArchive.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSZipArchive.h; sourceTree = "<group>"; };
 		8E0A66261AF23C26000CFB22 /* SSZipArchive.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSZipArchive.m; sourceTree = "<group>"; };
-		8E0A662C1AF23C66000CFB22 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		8E0A662E1AF23E88000CFB22 /* FileZip.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileZip.swift; sourceTree = "<group>"; };
-		8E0A66301AF23FB0000CFB22 /* FileList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileList.swift; sourceTree = "<group>"; };
 		8EA5BE9C1B03455400662CF4 /* FileCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileCollectionView.swift; sourceTree = "<group>"; };
+		8EBC65EE1C883EC20037376A /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		8ECA221A1B024F2400371911 /* EPUBContainerParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EPUBContainerParser.swift; sourceTree = "<group>"; };
-		8EF29CD41AF267A8000F4112 /* FileHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileHelper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,7 +80,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8E0A662D1AF23C66000CFB22 /* libz.dylib in Frameworks */,
+				8EBC65EF1C883EC20037376A /* libz.tbd in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -97,7 +97,7 @@
 		8E0A65E31AF23B8F000CFB22 = {
 			isa = PBXGroup;
 			children = (
-				8E0A662C1AF23C66000CFB22 /* libz.dylib */,
+				8EBC65EE1C883EC20037376A /* libz.tbd */,
 				8E0A65EE1AF23B8F000CFB22 /* SwiftFilesZip */,
 				8E0A66041AF23B8F000CFB22 /* SwiftFilesZipTests */,
 				8E0A65ED1AF23B8F000CFB22 /* Products */,
@@ -159,14 +159,14 @@
 				8E0A661B1AF23C25000CFB22 /* minizip */,
 				8E0A66251AF23C26000CFB22 /* SSZipArchive.h */,
 				8E0A66261AF23C26000CFB22 /* SSZipArchive.m */,
-				8E0A66111AF23BAA000CFB22 /* FileDelete.swift */,
-				8EF29CD41AF267A8000F4112 /* FileHelper.swift */,
-				8E0A66121AF23BAA000CFB22 /* FileDirectory.swift */,
-				8E0A66301AF23FB0000CFB22 /* FileList.swift */,
-				8E0A66131AF23BAA000CFB22 /* FileLoad.swift */,
-				8E0A66141AF23BAA000CFB22 /* FileSave.swift */,
 				8E0A661A1AF23C25000CFB22 /* SwiftFilesZip-Bridging-Header.h */,
 				8ECA221A1B024F2400371911 /* EPUBContainerParser.swift */,
+				8E03A2D21C875E7C00EC92A8 /* FileDelete.swift */,
+				8E03A2D31C875E7C00EC92A8 /* FileDirectory.swift */,
+				8E03A2D41C875E7C00EC92A8 /* FileHelper.swift */,
+				8E03A2D51C875E7C00EC92A8 /* FileList.swift */,
+				8E03A2D61C875E7C00EC92A8 /* FileLoad.swift */,
+				8E03A2D71C875E7C00EC92A8 /* FileSave.swift */,
 				8E0A662E1AF23E88000CFB22 /* FileZip.swift */,
 			);
 			name = SwiftFiles;
@@ -232,11 +232,14 @@
 		8E0A65E41AF23B8F000CFB22 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftMigration = 0720;
+				LastSwiftUpdateCheck = 0720;
 				LastUpgradeCheck = 0630;
 				ORGANIZATIONNAME = Gylphi;
 				TargetAttributes = {
 					8E0A65EB1AF23B8F000CFB22 = {
 						CreatedOnToolsVersion = 6.3.1;
+						DevelopmentTeam = MPWBP88JP3;
 					};
 					8E0A66001AF23B8F000CFB22 = {
 						CreatedOnToolsVersion = 6.3.1;
@@ -288,18 +291,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8E03A2DC1C875E7C00EC92A8 /* FileLoad.swift in Sources */,
 				8E0A66291AF23C26000CFB22 /* unzip.c in Sources */,
-				8E0A66311AF23FB0000CFB22 /* FileList.swift in Sources */,
-				8E0A66171AF23BAA000CFB22 /* FileLoad.swift in Sources */,
 				8E0A65F41AF23B8F000CFB22 /* ViewController.swift in Sources */,
+				8E03A2D81C875E7C00EC92A8 /* FileDelete.swift in Sources */,
+				8E03A2DB1C875E7C00EC92A8 /* FileList.swift in Sources */,
+				8E03A2D91C875E7C00EC92A8 /* FileDirectory.swift in Sources */,
+				8E03A2DA1C875E7C00EC92A8 /* FileHelper.swift in Sources */,
 				8E0A662A1AF23C26000CFB22 /* zip.c in Sources */,
-				8EF29CD51AF267A8000F4112 /* FileHelper.swift in Sources */,
+				8E03A2DD1C875E7C00EC92A8 /* FileSave.swift in Sources */,
 				8E0A66281AF23C26000CFB22 /* mztools.c in Sources */,
 				8E0A65F21AF23B8F000CFB22 /* AppDelegate.swift in Sources */,
-				8E0A66151AF23BAA000CFB22 /* FileDelete.swift in Sources */,
-				8E0A66181AF23BAA000CFB22 /* FileSave.swift in Sources */,
 				8EA5BE9D1B03455400662CF4 /* FileCollectionView.swift in Sources */,
-				8E0A66161AF23BAA000CFB22 /* FileDirectory.swift in Sources */,
 				8E0A66271AF23C26000CFB22 /* ioapi.c in Sources */,
 				8E0A662B1AF23C26000CFB22 /* SSZipArchive.m in Sources */,
 				8E0A662F1AF23E88000CFB22 /* FileZip.swift in Sources */,

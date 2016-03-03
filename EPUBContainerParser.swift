@@ -30,19 +30,20 @@ public class EPUBContainerParser:NSObject, NSXMLParserDelegate {
         }
         // takes account of multiple rootfiles and will return every NSURL in order for multiple versions contained in the rootfile
         while contentPaths.isEmpty == false {
-        if let path = contentPaths.first,
-            url = NSURL(fileURLWithPath: path),
-            xml = NSXMLParser(contentsOfURL: url) {
+        if let path = contentPaths.first
+             {
+                let url = NSURL(fileURLWithPath: path)
+                let xml = NSXMLParser(contentsOfURL: url)
                 parentFolder = parentFolders.first!
                 contentPaths.removeAtIndex(0)
                 parentFolders.removeAtIndex(0)
-                xml.delegate = self
-                xml.parse()
+                xml?.delegate = self
+                xml?.parse()
                 
         }
         }
-        let urlArray = map(spineArray, {NSURL(fileURLWithPath: self.manifestDictionary[$0]!)!})
-        let returnArray = filter(urlArray, {$0 != nil})
+        let urlArray = spineArray.map({NSURL(fileURLWithPath: self.manifestDictionary[$0]!)})
+        let returnArray = urlArray.filter({$0 != nil})
         // TODO: build an array of incorrect URLs for missing items
         return returnArray
     }
@@ -51,12 +52,12 @@ public class EPUBContainerParser:NSObject, NSXMLParserDelegate {
         
     }
     
-    public func parser(parser: NSXMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [NSObject : AnyObject]) {
+    public func parser(parser: NSXMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String]) {
         
         if elementName == "rootfile" {
-            let content = contentPath + (attributeDict["full-path"] as! String)
+            let content = attributeDict["full-path"] != nil ?  contentPath + attributeDict["full-path"]! as String : contentPath
             contentPaths.append(content)
-            let parent = contentPath.stringByDeletingLastPathComponent + "/"
+            let parent = (contentPath as NSString).stringByDeletingLastPathComponent + "/"
             parentFolders.append(parent)
             
         }
@@ -65,24 +66,36 @@ public class EPUBContainerParser:NSObject, NSXMLParserDelegate {
             isManifest = true
         }
         else if isManifest == true && elementName == "item" {
-            
             // array of everything, if any NSURLs return nil when constructed then item is missing
-            manifestDictionary[attributeDict["id"] as! String] = parentFolder + (attributeDict["href"] as! String)
+            if let id = attributeDict["id"],
+                href = attributeDict["href"] {
+                    manifestDictionary[id as String] = parentFolder + href as String
+
+                }
             
-            if attributeDict["media-type"] as! String == "application/vnd.ms-opentype" {
-                fontArray.append(attributeDict["href"] as! String)
+
+            // TODO: should this be "else if let" INSTEAD OF "if let"?
+            if let mediaType = attributeDict["media-type"],
+                    href = attributeDict["href"] {
+               if  mediaType as String == "application/vnd.ms-opentype" {
+
+                    fontArray.append(href as String)
+                }
+
+            
+            else if mediaType as String == "image/png"  || mediaType as String == "image/jpeg" || mediaType as String == "image/jpg" {
+                imageArray.append(href as String)
             }
-            
-            else if attributeDict["media-type"] as! String == "image/png"  || attributeDict["media-type"] as! String == "image/jpeg" || attributeDict["media-type"] as! String == "image/jpg" {
-                imageArray.append(attributeDict["href"] as! String)
             }
         }
         else if elementName == "spine" {
             isSpine = true
         }
         else if isSpine == true && elementName == "itemref" {
+            if let idref = attributeDict["idref"] {
+            spineArray.append(idref as String)
+            }
             
-            spineArray.append(attributeDict["idref"] as! String)
         }
     }
     
