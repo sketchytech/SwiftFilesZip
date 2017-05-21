@@ -27,6 +27,7 @@
 		8E0A662F1AF23E88000CFB22 /* FileZip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0A662E1AF23E88000CFB22 /* FileZip.swift */; };
 		8EA5BE9D1B03455400662CF4 /* FileCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA5BE9C1B03455400662CF4 /* FileCollectionView.swift */; };
 		8EBC65EF1C883EC20037376A /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EBC65EE1C883EC20037376A /* libz.tbd */; };
+		8EBC661F1C88A1A30037376A /* FileMove.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EBC661E1C88A1A30037376A /* FileMove.swift */; };
 		8ECA221B1B024F2400371911 /* EPUBContainerParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ECA221A1B024F2400371911 /* EPUBContainerParser.swift */; };
 /* End PBXBuildFile section */
 
@@ -72,6 +73,7 @@
 		8E0A662E1AF23E88000CFB22 /* FileZip.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileZip.swift; sourceTree = "<group>"; };
 		8EA5BE9C1B03455400662CF4 /* FileCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileCollectionView.swift; sourceTree = "<group>"; };
 		8EBC65EE1C883EC20037376A /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		8EBC661E1C88A1A30037376A /* FileMove.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileMove.swift; sourceTree = "<group>"; };
 		8ECA221A1B024F2400371911 /* EPUBContainerParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EPUBContainerParser.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -168,6 +170,7 @@
 				8E03A2D61C875E7C00EC92A8 /* FileLoad.swift */,
 				8E03A2D71C875E7C00EC92A8 /* FileSave.swift */,
 				8E0A662E1AF23E88000CFB22 /* FileZip.swift */,
+				8EBC661E1C88A1A30037376A /* FileMove.swift */,
 			);
 			name = SwiftFiles;
 			sourceTree = "<group>";
@@ -240,9 +243,11 @@
 					8E0A65EB1AF23B8F000CFB22 = {
 						CreatedOnToolsVersion = 6.3.1;
 						DevelopmentTeam = MPWBP88JP3;
+						LastSwiftMigration = 0820;
 					};
 					8E0A66001AF23B8F000CFB22 = {
 						CreatedOnToolsVersion = 6.3.1;
+						LastSwiftMigration = 0820;
 						TestTargetID = 8E0A65EB1AF23B8F000CFB22;
 					};
 				};
@@ -301,6 +306,7 @@
 				8E0A662A1AF23C26000CFB22 /* zip.c in Sources */,
 				8E03A2DD1C875E7C00EC92A8 /* FileSave.swift in Sources */,
 				8E0A66281AF23C26000CFB22 /* mztools.c in Sources */,
+				8EBC661F1C88A1A30037376A /* FileMove.swift in Sources */,
 				8E0A65F21AF23B8F000CFB22 /* AppDelegate.swift in Sources */,
 				8EA5BE9D1B03455400662CF4 /* FileCollectionView.swift in Sources */,
 				8E0A66271AF23C26000CFB22 /* ioapi.c in Sources */,
@@ -369,6 +375,7 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -415,6 +422,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -442,6 +450,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "SwiftFilesZip-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -455,6 +464,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "SwiftFilesZip-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -462,6 +472,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				ENABLE_TESTABILITY = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -473,6 +484,7 @@
 				INFOPLIST_FILE = SwiftFilesZipTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SwiftFilesZip.app/SwiftFilesZip";
 			};
 			name = Debug;
@@ -481,6 +493,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				ENABLE_TESTABILITY = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -488,6 +501,7 @@
 				INFOPLIST_FILE = SwiftFilesZipTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SwiftFilesZip.app/SwiftFilesZip";
 			};
 			name = Release;

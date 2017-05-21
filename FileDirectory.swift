@@ -1,16 +1,16 @@
 import Foundation
 
 public struct FileDirectory {
-    public static func applicationDirectory(directory:NSSearchPathDirectory, subdirectory:String? = nil) -> NSURL? {
+    public static func applicationDirectory(_ directory:FileManager.SearchPathDirectory, subdirectory:String? = nil) -> URL? {
     
     
-    if let documentsDirectoryPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true).first
+    if let documentsDirectoryPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first
     {
         if let subD = subdirectory {
-            return NSURL(fileURLWithPath:documentsDirectoryPath).URLByAppendingPathComponent(subD)
+            return URL(fileURLWithPath:documentsDirectoryPath).appendingPathComponent(subD)
         }
         else {
-            return NSURL(fileURLWithPath:documentsDirectoryPath)
+            return URL(fileURLWithPath:documentsDirectoryPath)
         }
     }
     else {
@@ -18,11 +18,11 @@ public struct FileDirectory {
     }
 }
 
-public static func applicationTemporaryDirectory() -> NSURL? {
+public static func applicationTemporaryDirectory() -> URL? {
     
         let tD = NSTemporaryDirectory()
     
-        return NSURL(string:tD)
+        return URL(string:tD)
     
 }
 }

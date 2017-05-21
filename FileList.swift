@@ -9,58 +9,57 @@
 import Foundation
 // see here for Apple's ObjC Code https://developer.apple.com/library/mac/documentation/FileManagement/Conceptual/FileSystemProgrammingGuide/AccessingFilesandDirectories/AccessingFilesandDirectories.html
 public class FileList {
-    public static func allFilesAndFolders(inDirectory directory:NSSearchPathDirectory, subdirectory:String?) throws -> [NSURL]? {
-
-        // Create load path
-        if let loadPath = buildPathToDirectory(directory, subdirectory: subdirectory) {
+    public static func allFilesAndFolders(inDirectory directory:FileManager.SearchPathDirectory, subdirectory:String?) throws -> [URL]? {
         
-        let url = NSURL(fileURLWithPath: loadPath)
-       
-        let properties = [NSURLLocalizedNameKey,
-            NSURLCreationDateKey, NSURLLocalizedTypeDescriptionKey]
-
-        let array = try  NSFileManager.defaultManager().contentsOfDirectoryAtURL(url, includingPropertiesForKeys: properties, options:NSDirectoryEnumerationOptions.SkipsHiddenFiles)
-        return array
+        // Create load path
+        if let loadPath = buildPathToDirectory(directory: directory, subdirectory: subdirectory) {
             
-}
+            let url = URL(fileURLWithPath: loadPath)
+            
+            let properties = [URLResourceKey.localizedNameKey,
+                              URLResourceKey.creationDateKey, URLResourceKey.localizedTypeDescriptionKey]
+            
+            let array = try  FileManager.default.contentsOfDirectory(at: url, includingPropertiesForKeys: properties, options:FileManager.DirectoryEnumerationOptions.skipsHiddenFiles)
+            return array
+            
+        }
         return nil
-}
+    }
     
-    public static func allFilesAndFoldersInTemporaryDirectory(subdirectory:String?) throws -> [NSURL]? {
+    public static func allFilesAndFoldersInTemporaryDirectory(subdirectory:String?) throws -> [URL]? {
         
         // Create load path
-        let loadPath = buildPathToTemporaryDirectory(subdirectory)
+        let loadPath = buildPathToTemporaryDirectory(subdirectory: subdirectory)
         
-        let url = NSURL(fileURLWithPath: loadPath)
+        let url = URL(fileURLWithPath: loadPath)
         
         
-        let properties = [NSURLLocalizedNameKey,
-            NSURLCreationDateKey, NSURLLocalizedTypeDescriptionKey]
-
-        let array = try NSFileManager.defaultManager().contentsOfDirectoryAtURL(url, includingPropertiesForKeys: properties, options:NSDirectoryEnumerationOptions.SkipsHiddenFiles)
-                return array
-                
-
-
+        let properties = [URLResourceKey.localizedNameKey,
+                          URLResourceKey.creationDateKey, URLResourceKey.localizedTypeDescriptionKey]
+        
+        let array = try FileManager.default.contentsOfDirectory(at: url, includingPropertiesForKeys: properties, options:FileManager.DirectoryEnumerationOptions.skipsHiddenFiles)
+        return array
+        
+        
+        
     }
     
     
     // private methods
     
-    private static func buildPathToDirectory(directory:NSSearchPathDirectory, subdirectory:String?) -> String?  {
+    private static func buildPathToDirectory(directory:FileManager.SearchPathDirectory, subdirectory:String?) -> String?  {
         // Remove unnecessary slash if need
         // Remove unnecessary slash if need
         var subDir = ""
         if let sub = subdirectory {
-        subDir = FileHelper.stripSlashIfNeeded(sub)
+            subDir = FileHelper.stripSlashIfNeeded(sub)
         }
         
         // Create generic beginning to file delete path
         var buildPath = ""
         
-        if let direct = FileDirectory.applicationDirectory(directory),
-            path = direct.path {
-                buildPath = path + "/"
+        if let direct = FileDirectory.applicationDirectory(directory) {
+            buildPath = direct.path + "/"
         }
         
         
@@ -69,7 +68,7 @@ public class FileList {
         
         
         var dir:ObjCBool = true
-        let dirExists = NSFileManager.defaultManager().fileExistsAtPath(buildPath, isDirectory:&dir)
+        let dirExists = FileManager.default.fileExists(atPath: buildPath, isDirectory:&dir)
         if dir.boolValue == false {
             return nil
         }
@@ -80,7 +79,7 @@ public class FileList {
     }
     public static func buildPathToTemporaryDirectory(subdirectory:String?) -> String {
         // Remove unnecessary slash if need
-
+        
         var subDir:String?
         if let sub = subdirectory {
             subDir = FileHelper.stripSlashIfNeeded(sub)
@@ -89,9 +88,9 @@ public class FileList {
         // Create generic beginning to file load path
         var loadPath = ""
         
-        if let direct = FileDirectory.applicationTemporaryDirectory(),
-            path = direct.path {
-                loadPath = path + "/"
+        if let direct = FileDirectory.applicationTemporaryDirectory()
+            {
+            loadPath = direct.path + "/"
         }
         
         if let sub = subDir {
@@ -104,6 +103,6 @@ public class FileList {
         return loadPath
     }
     
-        
-   
+    
+    
 }

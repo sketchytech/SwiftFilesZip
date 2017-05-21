@@ -7,7 +7,7 @@ import Foundation
 //  Created by Anthony Levings on 31/03/2015.
 //
 
-public class EPUBContainerParser:NSObject, NSXMLParserDelegate {
+open class EPUBContainerParser:NSObject, XMLParserDelegate {
     var isManifest = false
     var isSpine = false
     // manifest dictionary links ids to urls
@@ -22,9 +22,9 @@ public class EPUBContainerParser:NSObject, NSXMLParserDelegate {
     var parentFolders = [String]()
     
     // returns ordered list of NSURLs for contents
-    public func parseXML(xml:NSURL) -> [NSURL] {
-        contentPath = xml.path! + "/"
-        if let container = NSXMLParser(contentsOfURL: xml.URLByAppendingPathComponent("META-INF/container.xml")) {
+    open func parseXML(_ xml:URL) -> [URL] {
+        contentPath = xml.path + "/"
+        if let container = XMLParser(contentsOf: xml.appendingPathComponent("META-INF/container.xml")) {
             container.delegate = self
             container.parse()
         }
@@ -32,32 +32,32 @@ public class EPUBContainerParser:NSObject, NSXMLParserDelegate {
         while contentPaths.isEmpty == false {
         if let path = contentPaths.first
              {
-                let url = NSURL(fileURLWithPath: path)
-                let xml = NSXMLParser(contentsOfURL: url)
+                let url = URL(fileURLWithPath: path)
+                let xml = XMLParser(contentsOf: url)
                 parentFolder = parentFolders.first!
-                contentPaths.removeAtIndex(0)
-                parentFolders.removeAtIndex(0)
+                contentPaths.remove(at: 0)
+                parentFolders.remove(at: 0)
                 xml?.delegate = self
                 xml?.parse()
                 
         }
         }
-        let urlArray = spineArray.map({NSURL(fileURLWithPath: self.manifestDictionary[$0]!)})
+        let urlArray = spineArray.map({URL(fileURLWithPath: self.manifestDictionary[$0]!)})
         let returnArray = urlArray.filter({$0 != nil})
         // TODO: build an array of incorrect URLs for missing items
         return returnArray
     }
     
-    public func parserDidStartDocument(parser: NSXMLParser) {
+    open func parserDidStartDocument(_ parser: XMLParser) {
         
     }
     
-    public func parser(parser: NSXMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String]) {
+    open func parser(_ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String]) {
         
         if elementName == "rootfile" {
             let content = attributeDict["full-path"] != nil ?  contentPath + attributeDict["full-path"]! as String : contentPath
             contentPaths.append(content)
-            let parent = (contentPath as NSString).stringByDeletingLastPathComponent + "/"
+            let parent = (contentPath as NSString).deletingLastPathComponent + "/"
             parentFolders.append(parent)
             
         }
@@ -68,7 +68,7 @@ public class EPUBContainerParser:NSObject, NSXMLParserDelegate {
         else if isManifest == true && elementName == "item" {
             // array of everything, if any NSURLs return nil when constructed then item is missing
             if let id = attributeDict["id"],
-                href = attributeDict["href"] {
+                let href = attributeDict["href"] {
                     manifestDictionary[id as String] = parentFolder + href as String
 
                 }
@@ -76,7 +76,7 @@ public class EPUBContainerParser:NSObject, NSXMLParserDelegate {
 
             // TODO: should this be "else if let" INSTEAD OF "if let"?
             if let mediaType = attributeDict["media-type"],
-                    href = attributeDict["href"] {
+                    let href = attributeDict["href"] {
                if  mediaType as String == "application/vnd.ms-opentype" {
 
                     fontArray.append(href as String)
@@ -99,7 +99,7 @@ public class EPUBContainerParser:NSObject, NSXMLParserDelegate {
         }
     }
     
-    public func parser(parser: NSXMLParser, foundCharacters string: String?) {
+    open func parser(_ parser: XMLParser, foundCharacters string: String?) {
         if let str = string {
             
             
@@ -108,7 +108,7 @@ public class EPUBContainerParser:NSObject, NSXMLParserDelegate {
         }
     }
     
-    public func parser(parser: NSXMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?) {
+    open func parser(_ parser: XMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?) {
         
         if elementName == "manifest" {
             isManifest = false
@@ -120,7 +120,7 @@ public class EPUBContainerParser:NSObject, NSXMLParserDelegate {
         
     }
     
-    public func parserDidEndDocument(parser: NSXMLParser) {
+    open func parserDidEndDocument(_ parser: XMLParser) {
         
         
     }
